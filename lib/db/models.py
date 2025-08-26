@@ -15,3 +15,14 @@ class Organizer(Base):
 
 
 
+class participant(Base):
+    __tablename__ = "participants"
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String(40), nullable=False)
+    last_name = Column(String(40), nullable=False)
+    email_address = Column(String)
+    phone_number = Column(Integer, nullable= False)
+    venue.id = Column(Integer, ForeignKey(venue.id))
+    workshops = relationship("Workshop", back_populates="participants")
+    venue = relationship("Venue", back_populates="participants")
+
