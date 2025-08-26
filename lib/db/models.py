@@ -26,3 +26,22 @@ class participant(Base):
     workshops = relationship("Workshop", back_populates="participants")
     venue = relationship("Venue", back_populates="participants")
 
+
+class Venue(Base):
+    __tablename__ = "venues"
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    location = Column(String, nullable=False)
+    Capacity = Column(Integer)
+    participants = relationship("Participant", back_populates="venue")
+    workshops = relationship("Workshop", back_populates="venue")
+
+class Workshop(Base):
+    __tablename__= "workshops"
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    description = Column(Text(200))
+    organizer.id = Column(Integer, ForeignKey(organizer.id))
+    venue.id = Column(Integer, ForeignKey("venue.id"))
+    organizer = relationship("Organizer", back_populates="workshops")
+    venue = relationship("Venue", back_populates="workshops")
